@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CellScannerFiles", "CellScannerFiles\CellScannerFiles.shproj", "{A3782935-F5E6-4792-8A4E-27840E22AB91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellScanner", "CellScanner\CellScanner.csproj", "{DCCC5DB0-AA36-4151-A80C-EBC896BDA162}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellScannerService", "CellScannerService\CellScannerService.csproj", "{4B627168-4DF4-4C1C-96C2-624C25C376AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{D512FB72-613F-41C3-BC24-5A671C8B6455}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCCC5DB0-AA36-4151-A80C-EBC896BDA162}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DCCC5DB0-AA36-4151-A80C-EBC896BDA162}.Debug|x64.Build.0 = Debug|Any CPU
+		{DCCC5DB0-AA36-4151-A80C-EBC896BDA162}.Release|x64.ActiveCfg = Release|Any CPU
+		{DCCC5DB0-AA36-4151-A80C-EBC896BDA162}.Release|x64.Build.0 = Release|Any CPU
+		{4B627168-4DF4-4C1C-96C2-624C25C376AF}.Debug|x64.ActiveCfg = Debug|x64
+		{4B627168-4DF4-4C1C-96C2-624C25C376AF}.Debug|x64.Build.0 = Debug|x64
+		{4B627168-4DF4-4C1C-96C2-624C25C376AF}.Release|x64.ActiveCfg = Release|x64
+		{4B627168-4DF4-4C1C-96C2-624C25C376AF}.Release|x64.Build.0 = Release|x64
+		{D512FB72-613F-41C3-BC24-5A671C8B6455}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D512FB72-613F-41C3-BC24-5A671C8B6455}.Debug|x64.Build.0 = Debug|Any CPU
+		{D512FB72-613F-41C3-BC24-5A671C8B6455}.Release|x64.ActiveCfg = Release|Any CPU
+		{D512FB72-613F-41C3-BC24-5A671C8B6455}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0F19F16-E94C-486B-9941-09D9B26F216E}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CellScannerFiles\CellScannerFiles.projitems*{4b627168-4df4-4c1c-96c2-624c25c376af}*SharedItemsImports = 4
+		CellScannerFiles\CellScannerFiles.projitems*{a3782935-f5e6-4792-8a4e-27840e22ab91}*SharedItemsImports = 13
+		CellScannerFiles\CellScannerFiles.projitems*{dccc5db0-aa36-4151-a80c-ebc896bda162}*SharedItemsImports = 4
+	EndGlobalSection
+EndGlobal
