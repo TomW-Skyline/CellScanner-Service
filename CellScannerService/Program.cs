@@ -12,6 +12,8 @@
 
 	public class Program
 	{
+		private const string DEBUG_TOKEN = "3C877D96-2E40-4CB0-84B1-68861C8777AE";
+
 		public static void Main(string[] args)
 		{
 			string token;
@@ -24,7 +26,7 @@
 			}
 			else
 			{
-				token = Guid.NewGuid().ToString();
+				token = DEBUG_TOKEN;
 				parentPid = -1;
 			}
 

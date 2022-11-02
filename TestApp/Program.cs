@@ -1,26 +1,20 @@
 ﻿namespace TestApp
 {
 	using System;
-	using System.Collections.Generic;
 	using System.Diagnostics;
-	using System.Linq;
-	using System.Text;
 	using System.Threading;
-	using System.Threading.Tasks;
+
 	using CellScanner.API;
 
 	using ProcessHandling;
 
 	internal class Program
 	{
+		private const string DEBUG_TOKEN = "3C877D96-2E40-4CB0-84B1-68861C8777AE";
+
 		static void Main(string[] args)
 		{
-			string token = Guid.NewGuid().ToString();
-
-			var process = new CellScannerServiceProcess(token);
-			process.StartProcess();
-			Thread.Sleep(2000);
-			var serviceClient = new ServiceProxy(process.Token);
+			var serviceClient = new ServiceProxy(DEBUG_TOKEN);
 
 			var version = serviceClient.Get_DLL_Version();
 			Console.WriteLine("DLL version: " + version);
