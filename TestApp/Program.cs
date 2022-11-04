@@ -16,10 +16,13 @@
 		{
 			var serviceClient = new ServiceProxy(DEBUG_TOKEN);
 
+			var info = serviceClient.GetServiceInfo();
+			Console.WriteLine(info);
+
 			var version = serviceClient.Get_DLL_Version();
 			Console.WriteLine("DLL version: " + version);
 
-			serviceClient.Set_IP_Addr("");
+			serviceClient.Set_IP_Addr("192.168.120.135");
 			serviceClient.Set_GPS(false);
 			LogEvents(serviceClient);
 
@@ -38,6 +41,9 @@
 				LogMeasurements(serviceClient);
 				Thread.Sleep(100);
 			}
+
+			serviceClient.StopMeasurement();
+			LogEvents(serviceClient);
 
 			Console.WriteLine("DONE");
 			Console.ReadKey();

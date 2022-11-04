@@ -30,6 +30,9 @@
 				parentPid = -1;
 			}
 
+			var user = $"{Environment.UserDomainName}/{Environment.UserName}";
+			Console.WriteLine($"Service is running as {user}");
+
 			var watchdog = new Watchdog(TimeSpan.FromMinutes(2));
 
 			StartService(token, watchdog);

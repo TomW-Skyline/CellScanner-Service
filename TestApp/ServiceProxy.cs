@@ -25,6 +25,11 @@
 			return Channel.Ping();
 		}
 
+		public string GetServiceInfo()
+		{
+			return Channel.GetServiceInfo();
+		}
+
 		public ICollection<Event> GetNewEvents()
 		{
 			return Channel.GetNewEvents();

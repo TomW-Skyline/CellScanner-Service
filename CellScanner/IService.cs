@@ -13,6 +13,9 @@
 		bool Ping();
 
 		[OperationContract]
+		string GetServiceInfo();
+
+		[OperationContract]
 		int Get_DLL_Version();
 
 		[OperationContract]

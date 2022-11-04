@@ -42,6 +42,13 @@
 			return true;
 		}
 
+		public string GetServiceInfo()
+		{
+			var user = $"{Environment.UserDomainName}/{Environment.UserName}";
+
+			return $"Service is running as {user}";
+		}
+
 		public int Get_DLL_Version()
 		{
 			return _thread.Invoke(CellScanner.Get_DLL_Version);
