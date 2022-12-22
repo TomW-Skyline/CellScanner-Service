@@ -7,6 +7,7 @@
 	using CellScanner;
 	using CellScanner.API;
 	using CellScanner.Data;
+	using CellScanner.Tools;
 
 	public class ServiceProxy : ClientBase<IService>, IService
 	{
@@ -16,7 +17,7 @@
 		private TScannerFreqList _currentFreqList;
 
 		public ServiceProxy(string token)
-			: base(new NetNamedPipeBinding(), new EndpointAddress($"net.pipe://localhost/CellScannerService/{token}"))
+			: base(BindingFactory.GetBinding(), new EndpointAddress($"net.pipe://localhost/CellScannerService/{token}"))
 		{
 		}
 

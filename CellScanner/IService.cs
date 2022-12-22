@@ -6,7 +6,7 @@
 	using CellScanner.API;
 	using CellScanner.Data;
 
-	[ServiceContract]
+	[ServiceContract()]
 	public interface IService
 	{
 		[OperationContract]

@@ -61,6 +61,7 @@
 
 		[DllImport(@"CellScanner64.dll", CallingConvention = CallingConvention.StdCall)]
 		public static extern void TestExternalGetMeasurement();
+
 		#endregion
 	}
 }

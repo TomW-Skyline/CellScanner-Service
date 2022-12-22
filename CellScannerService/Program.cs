@@ -4,15 +4,19 @@
 	using System.Diagnostics;
 	using System.ServiceModel;
 	using System.ServiceModel.Description;
+	using System.Windows.Threading;
 
 	using Behaviors;
 
 	using CellScanner;
-	using CellScanner.Threading;
+	using CellScanner.Tools;
 
 	public class Program
 	{
 		private const string DEBUG_TOKEN = "3C877D96-2E40-4CB0-84B1-68861C8777AE";
+
+		private static Service _service;
+		private static ServiceHost _serviceHost;
 
 		public static void Main(string[] args)
 		{
@@ -33,36 +37,39 @@
 			var user = $"{Environment.UserDomainName}/{Environment.UserName}";
 			Console.WriteLine($"Service is running as {user}");
 
-			var watchdog = new Watchdog(TimeSpan.FromMinutes(2));
-
-			StartService(token, watchdog);
+			StartService(token);
 			MonitorParentProcess(parentPid);
 
 			// keep the program active
-			MessageLoop.Run();
+			Dispatcher.Run();
 		}
 
-		private static void StartService(string token, Watchdog watchdog)
+		private static void StartService(string token)
 		{
 			var uri = new Uri($"net.pipe://localhost/CellScannerService/{token}");
 
-			var thread = new Threading.CellScannerThread();
-			var service = new Service(thread, watchdog);
-			var serviceHost = new ServiceHost(service, uri);
-			serviceHost.Faulted += (sender, args) =>
+			_service = new Service();
+			_serviceHost = new ServiceHost(_service);
+
+			_serviceHost.Faulted += (sender, args) =>
 			{
-				Console.Error.WriteLine("Service host is in faulted state");
+				Console.WriteLine("Service host is in faulted state");
+				Environment.Exit(10);
+			};
+			_serviceHost.Closed += (sender, args) =>
+			{
+				Console.WriteLine("Service host is closed");
 				Environment.Exit(10);
 			};
 
-			EnableIncludeExceptionDetailInFaults(serviceHost);
+			EnableIncludeExceptionDetailInFaults(_serviceHost);
 
-			var endpoint = serviceHost.AddServiceEndpoint(typeof(IService), new NetNamedPipeBinding(), "/");
+			var endpoint = _serviceHost.AddServiceEndpoint(typeof(IService), BindingFactory.GetBinding(), uri + "/");
 			endpoint.Behaviors.Add(new ErrorHandlerBehavior());
 			endpoint.Behaviors.Add(new MaxFaultSizeBehavior(Int32.MaxValue));
 
-			serviceHost.Open();
-			
+			_serviceHost.Open();
+
 			Console.WriteLine($"Service started (endpoint={endpoint.Address.Uri})");
 		}
 
@@ -78,7 +85,7 @@
 			process.EnableRaisingEvents = true;
 			process.Exited += (sender, args) =>
 			{
-				Console.Error.WriteLine("Parent process has exited");
+				Console.WriteLine("Parent process has exited");
 				Environment.Exit(12);
 			};
 		}

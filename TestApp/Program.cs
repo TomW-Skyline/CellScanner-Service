@@ -2,11 +2,10 @@
 {
 	using System;
 	using System.Diagnostics;
+	using System.IO;
 	using System.Threading;
 
 	using CellScanner.API;
-
-	using ProcessHandling;
 
 	internal class Program
 	{
@@ -22,28 +21,42 @@
 			var version = serviceClient.Get_DLL_Version();
 			Console.WriteLine("DLL version: " + version);
 
-			serviceClient.Set_IP_Addr("192.168.120.135");
+			string ip = File.ReadAllText("IP Address.txt").Trim();
+			Console.WriteLine($"IP address from file: {ip}");
+
+			serviceClient.Set_IP_Addr(ip);
 			serviceClient.Set_GPS(false);
 			LogEvents(serviceClient);
 
 			var freqs = BuildFrequenciesList();
-			serviceClient.SetFrequencies(freqs);
-			LogEvents(serviceClient);
 
-			serviceClient.StartMeasurement();
-			LogEvents(serviceClient);
-
-			// read events and measurements during 1 minutes
-			var sw = Stopwatch.StartNew();
-			while (sw.Elapsed < TimeSpan.FromMinutes(1))
+			for (var i = 0; i < 50; i++)
 			{
-				LogEvents(serviceClient);
-				LogMeasurements(serviceClient);
-				Thread.Sleep(100);
-			}
+				Console.WriteLine($"i: {i}");
 
-			serviceClient.StopMeasurement();
-			LogEvents(serviceClient);
+				if (serviceClient.Ping())
+				{
+					Console.WriteLine("Pong received!");
+				}
+
+				serviceClient.SetFrequencies(freqs);
+				LogEvents(serviceClient);
+
+				serviceClient.StartMeasurement();
+				LogEvents(serviceClient);
+
+				// read events and measurements
+				var sw = Stopwatch.StartNew();
+				while (sw.Elapsed < TimeSpan.FromSeconds(10))
+				{
+					LogEvents(serviceClient);
+					LogMeasurements(serviceClient);
+					Thread.Sleep(100);
+				}
+
+				serviceClient.StopMeasurement();
+				LogEvents(serviceClient); 
+			}
 
 			Console.WriteLine("DONE");
 			Console.ReadKey();
