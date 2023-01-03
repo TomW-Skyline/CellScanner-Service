@@ -9,6 +9,7 @@
 	using Behaviors;
 
 	using CellScanner;
+	using CellScanner.Threading;
 	using CellScanner.Tools;
 
 	public class Program
@@ -48,7 +49,9 @@
 		{
 			var uri = new Uri($"net.pipe://localhost/CellScannerService/{token}");
 
-			_service = new Service();
+			var thread = new CellScannerThread();
+
+			_service = new Service(thread);
 			_serviceHost = new ServiceHost(_service);
 
 			_serviceHost.Faulted += (sender, args) =>

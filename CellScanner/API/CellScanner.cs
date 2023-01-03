@@ -8,10 +8,10 @@
 		public const int MAX_SCANNER_FREQS = 512;
 		public const int MAX_5GNR_SSB = 64;
 
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)] 
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void TExternalGetMeasurement(IntPtr measurement);
 
-		[UnmanagedFunctionPointer(CallingConvention.StdCall)] 
+		[UnmanagedFunctionPointer(CallingConvention.StdCall)]
 		public delegate void TApplicationLogMsg(string msg);
 
 		#region Main Functions

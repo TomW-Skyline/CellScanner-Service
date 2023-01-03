@@ -32,7 +32,7 @@
 
 			for (var i = 0; i < 50; i++)
 			{
-				Console.WriteLine($"i: {i}");
+				Console.WriteLine($"Iteration {i}");
 
 				if (serviceClient.Ping())
 				{
